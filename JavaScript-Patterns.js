@@ -152,6 +152,54 @@ var myModulePlugin = (function(jQ){
 //    Revealing Module Pattern
 // ------------------------------
 
+// More clear to understand and write but also more fragile to override than the Module Pattern
+
+var myModule = (function(){
+
+	var inventory = [];
+
+	function private_function(){
+		// I'm not available
+	}
+
+	function public_addItem(item){
+		inventory.push(item);
+		console.log("New item was added");
+	}
+	function public_itemCount(){
+		return inventory.length;
+	}
+	function public_deleteItem(itemName){
+		for (var key in inventory){
+			var item = inventory[key];
+			if (item.name.toLowerCase() === itemName.toLowerCase()){
+				inventory.splice(key, 1);
+				console.log(itemName + " was removed from the inventory");
+			}
+		}
+	}
+
+	return {
+		add: public_addItem,
+		delete: public_deleteItem,
+		count: public_itemCount
+	};
+})();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
