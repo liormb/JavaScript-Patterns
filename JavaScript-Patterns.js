@@ -50,6 +50,7 @@ var mondeo = new Car("Ford Mondeo", 2012, 42000);
 console.log( civic.toString()  );
 console.log( mondeo.toString() );
 
+
 // ------------------------------
 //       The Module Pattern
 // ------------------------------
@@ -129,6 +130,29 @@ bank.setPassword("1234").
 	redraw(60).
 	currentBalance().
 	logout();
+
+
+// Another implementation of a Module Pattern
+// jQuery Plugin / Extention 
+var myModulePlugin = (function(jQ){
+
+	function privateMethod(){
+		jQ(".container").html("Test");
+	}
+
+	return {
+		publicMethod: function(){
+			privateMethod();
+		}
+	};
+})(jQuery);
+
+
+// ------------------------------
+//    Revealing Module Pattern
+// ------------------------------
+
+
 
 
 
