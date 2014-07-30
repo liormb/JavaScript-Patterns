@@ -22,6 +22,8 @@ var myModule = {
 	}
 };
 
+// Usage:
+
 myModule.sayHello();
 myModule.checkChaching();
 myModule.updateConfig({
@@ -44,6 +46,8 @@ Car.prototype.toString = function(){
 	return this.model + " has done " + this.miles + " miles";
 };
 
+// Usage:
+
 var civic  = new Car("Honda Civic", 2014, 15000);
 var mondeo = new Car("Ford Mondeo", 2012, 42000);
 
@@ -55,7 +59,7 @@ console.log( mondeo.toString() );
 //       The Module Pattern
 // ------------------------------
 
-// Good for seperating between Private & Public parameters and methods
+// Good for seperating between Private & Public properties and methods
 
 var bank = (function(){
 	// private
@@ -123,6 +127,8 @@ var bank = (function(){
 	};
 })();
 
+// Usage:
+
 bank.setPassword("1234").
 	login("1234").
 	currentBalance().
@@ -186,8 +192,75 @@ var myModule = (function(){
 	};
 })();
 
+// Usage:
+
+myModule.add({name: "Lior", age: 30});
+myModule.add({name: "John", age: 20});
+myModule.count();
+myModule.delete("Lior");
+myModule.count();
 
 
+// ------------------------------
+//     The Singleton Pattern
+// ------------------------------
+
+var mySingleton = (function(){
+	var instance;
+
+	function init(){
+		var type = "Car";
+		var wheels = 4;
+		var drive = true;
+
+		function setDrive(status){
+			drive = status;
+		}
+
+		var minPrice = 20000;
+		var maxPrice = 60000;
+		var price = Math.floor(Math.random() * (maxPrice - minPrice + 1)) + minPrice;
+
+		function information(){
+			console.log("I'm a " + type + " with " + wheels + " wheels and I" + ((!drive) ? " can't" : "") + " drive");
+		}
+
+		return {
+			drive: function(status){
+				setDrive(status);
+			},
+			getPrice: function(){
+				return price;
+			},
+			info: function(){
+				information();
+			}
+		};
+	}
+
+	return {
+		getInstance: function(){
+			if (!instance){
+				instance = init();
+			}
+			return instance;
+		}
+	};
+})();
+
+// Usage:
+
+var single1 = mySingleton.getInstance();
+var single2 = mySingleton.getInstance();
+
+// single1.getPrice() === single2.getPrice(); => true
+
+single1.info(); // I'm a Car with 4 wheels and I drive
+single2.info(); // I'm a Car with 4 wheels and I drive 
+
+single1.drive(false);
+single1.info(); // I'm a Car with 4 wheels and I can't drive
+single2.info(); // I'm a Car with 4 wheels and I can't drive 
 
 
 
