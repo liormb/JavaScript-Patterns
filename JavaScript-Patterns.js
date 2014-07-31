@@ -270,8 +270,60 @@ single2.info(); // I'm a Car with 4 wheels and I can't drive
 //      The Observer Pattern
 // ------------------------------
 
+// The Observer
+function Observer(){
+	this.update = function(){
+		console.log("I had been notified and I'll act accordinaly");
+		// add code here to change when this event happen
+	}
+}
 
+// The Observer List
+function ObserverList(){
+	this.observerList = [];
+}
+ObserverList.prototype = {
+	add: function(obj){
+		return this.observerList.push(obj);
+	},
+	count: function(){
+		return this.observerList.length;
+	},
+	get: function(index){
+		if (index > -1 && index < this.count()){
+			return this.observerList[index];
+		}
+	},
+	indexOf: function(obj, startIndex){
+		for (var i = startIndex || 0; i < this.count(); i++){
+			if (this.observerList[i] === obj){
+				return i;
+			}
+		}
+		return -1;
+	},
+	removeAt: function(index){
+		this.observerList.splice(index, 1);
+	}
+};
 
+// The Subject
+function Subject(){
+	this.observers = new ObserverList();
+}
+Subject.prototype = {
+	add: function(observer){
+		this.observers.add(observer);
+	},
+	remove: function(observer){
+		this.observers.removeAt( this.observers.indexOf(observer) );
+	},
+	notify: function(context){
+		for (var i=0; i < this.observers.count(); i++){
+			this.observers.get(i).update(context);
+		}
+	}
+};
 
 
 
