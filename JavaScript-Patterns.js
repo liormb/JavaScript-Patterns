@@ -205,6 +205,9 @@ myModule.count();
 //     The Singleton Pattern
 // ------------------------------
 
+// Use when only one object is needed to manage others accross the application
+// Try to avoid this pattern | can be more difficult to test
+
 var mySingleton = (function(){
 	var instance;
 
@@ -261,6 +264,15 @@ single2.info(); // I'm a Car with 4 wheels and I drive
 single1.drive(false);
 single1.info(); // I'm a Car with 4 wheels and I can't drive
 single2.info(); // I'm a Car with 4 wheels and I can't drive 
+
+
+// ------------------------------
+//      The Observer Pattern
+// ------------------------------
+
+
+
+
 
 
 
